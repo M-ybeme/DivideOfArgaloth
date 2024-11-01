@@ -1,57 +1,43 @@
 ﻿@page "/characters"
 
-<div class="container-fluid bg-dark">
+<div class="container-fluid bg-dark text-light">
     <div class="row">
-        <div class="col-12 bg-dark text-light text-center py-3">
+        <div class="col-12 text-center py-3">
             <h1>Characters of Anferdale</h1>
         </div>
     </div>
-    <button class="btn btn-primary" @onclick="TestClick">Test Button</button>
     <div class="row mt-4">
-        <!-- Character Images -->
-        <div class="col-md-12">
-            <div class="row">
-                @foreach (var character in CharacterList)
-                {
-                    <div class="col-md-6 col-sm-6 text-center mb-4">
-                        <img src="@character.ImageUrl"
-                             class="rounded-circle img-thumbnail"
-                             style="cursor: pointer; width: 150px; height: 150px;"
-                             @onclick="@(() => SelectCharacter(character))" />
-                        <h5 class="mt-2 text-light">@character.Name</h5>
-                        <button class="btn btn-primary mt-2" @onclick="@(() => SelectCharacter(character))">Read More</button>
+        @foreach (var character in CharacterList)
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card bg-secondary text-light">
+                    <div class="row no-gutters">
+                        <div class="col-md-4 text-center">
+                            <img src="@character.ImageUrl"
+                                 class="rounded-circle img-thumbnail m-3"
+                                 style="width: 150px; height: 150px;" />
+                            <h5 class="mt-2">@character.Name</h5>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <p><strong>Race:</strong> @character.Race</p>
+                                <p><strong>Age:</strong> @character.Age</p>
+                                <p><strong>Appearance:</strong> @character.Appearance</p>
+                                <p><strong>Personality:</strong> @character.Personality</p>
+                                <p><strong>Skills and Abilities:</strong> @character.SkillsAndAbilities</p>
+                                <p><strong>Role in the Community:</strong> @character.RoleInCommunity</p>
+                                <p><strong>Backstory:</strong> @character.Backstory</p>
+                                <p><strong>Interactions:</strong> @character.Interactions</p>
+                            </div>
+                        </div>
                     </div>
-                }
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 
 @code {
-    private void TestClick()
-    {
-        Console.WriteLine("Test button clicked.");
-    }
-
-    protected override void OnInitialized()
-    {
-        Console.WriteLine("Characters page initialized.");
-    }
-
-    private class Character
-    {
-        public string? Name { get; set; }
-        public string? Race { get; set; }
-        public string? Age { get; set; }
-        public string? Appearance { get; set; }
-        public string? Personality { get; set; }
-        public string? SkillsAndAbilities { get; set; }
-        public string? RoleInCommunity { get; set; }
-        public string? Backstory { get; set; }
-        public string? Interactions { get; set; }
-        public string? ImageUrl { get; set; }
-    }
-
     private List<Character> CharacterList = new List<Character>
     {
         new Character
@@ -161,16 +147,17 @@
 
     };
 
-    private Character? SelectedCharacter { get; set; }
-
-    private void SelectCharacter(Character character)
+    private class Character
     {
-        Console.WriteLine($"Selected character: {character.Name}");
-        SelectedCharacter = character;
-    }
-
-    private void DeselectCharacter()
-    {
-        SelectedCharacter = null;
+        public string? Name { get; set; }
+        public string? Race { get; set; }
+        public string? Age { get; set; }
+        public string? Appearance { get; set; }
+        public string? Personality { get; set; }
+        public string? SkillsAndAbilities { get; set; }
+        public string? RoleInCommunity { get; set; }
+        public string? Backstory { get; set; }
+        public string? Interactions { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }
